@@ -9,6 +9,9 @@ import CompMostrarProductos from "../componentes/mostrarProductos";
 import CompAgregarProductos from "../componentes/crearProductos";
 import CompMostrarClientes from "../componentes/mostrarClientes";
 import CompAgregarClientes from "../componentes/crearClientes";
+import CompInsumosMateriaPrima from "../componentes/InsumosMateriaPrima";
+import CompAgregarInsumosMateriaPrima from "../componentes/crearInsumosMateriaPrima";
+
 const CompRutas = () => {
   return (
     <Routes>
@@ -26,8 +29,9 @@ const CompRutas = () => {
       <Route path="/clientes" element={<CompMostrarClientes />} />
       <Route path="/clientes/agregar" element={<CompAgregarClientes />} />
 
-
-
+      <Route path="/insumosYMateriaPrima" element={<CompInsumosMateriaPrima />} />
+      <Route path="/insumosYMateriaPrima/agregar" element={<CompAgregarInsumosMateriaPrima />} />
+      
     </Routes>
   );
 };

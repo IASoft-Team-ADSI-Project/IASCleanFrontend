@@ -33,9 +33,24 @@ const CompAdministrador = () => {
                     Clientes
                   </div>
                 </div>
+
                 <div className="col">
                   <div className="p-3 bg-transparent">
-                    <Link to={`/proveedores`} className="btn btn-outline-primary">
+                    <Link to={`/insumosYMateriaPrima`} className="btn btn-outline-primary">
+                      {" "}
+                      <i class="fa-solid fa-chart-simple"></i>
+                    </Link>
+                    <br />
+                    Insumos y Materia Prima 
+                  </div>
+                </div>
+
+                <div className="col">
+                  <div className="p-3 bg-transparent">
+                    <Link
+                      to={`/proveedores`}
+                      className="btn btn-outline-primary"
+                    >
                       {" "}
                       <i class="fa-sharp fa-solid fa-truck-field"></i>
                     </Link>

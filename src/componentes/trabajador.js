@@ -14,7 +14,7 @@ const CompTrabajador = () => {
               <div className="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
                 <div className="col">
                   <div className="p-3 bg-transparentparent">
-                    <Link to={`/`} className="btn btn-outline-primary">
+                    <Link to={`/productos`} className="btn btn-outline-primary">
                       {" "}
                       <i class="fa-sharp fa-solid fa-cart-shopping"></i>
                     </Link>
@@ -25,7 +25,7 @@ const CompTrabajador = () => {
 
                 <div className="col">
                   <div className="p-3 bg-transparent">
-                    <Link to={`/`} className="btn btn-outline-primary">
+                    <Link to={`/clientes`} className="btn btn-outline-primary">
                       {" "}
                       <i class="fa-solid fa-user"></i>
                     </Link>
@@ -36,12 +36,12 @@ const CompTrabajador = () => {
 
                 <div className="col">
                   <div className="p-3 bg-transparent">
-                    <Link to={`/`} className="btn btn-outline-primary">
+                    <Link to={`/insumosYMateriaPrima`} className="btn btn-outline-primary">
                       {" "}
                       <i class="fa-solid fa-chart-simple"></i>
                     </Link>
                     <br />
-                    Graficos de ventas
+                    Insumos y Materia Prima 
                   </div>
                 </div>
 
@@ -52,7 +52,7 @@ const CompTrabajador = () => {
                       <i class="fa-solid fa-money-bill-trend-up"></i>
                     </Link>
                     <br />
-                    Ingresos
+                    Ventas
                   </div>
                 </div>
 
@@ -63,7 +63,7 @@ const CompTrabajador = () => {
                       <i class="fa-sharp fa-solid fa-minus"></i>
                     </Link>
                     <br />
-                    Gastos
+                    Pending
                   </div>
                 </div>
               </div>

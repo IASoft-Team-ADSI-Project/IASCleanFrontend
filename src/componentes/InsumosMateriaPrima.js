@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const URL = "http://localhost:5000/api/producto/";
 
-const CompMostrarProductos = () => {
+const CompInsumosMateriaPrima = () => {
   const [productos, setProducto] = useState([]);
   useEffect(() => {
     getProductos();
@@ -27,7 +27,7 @@ const CompMostrarProductos = () => {
     <div className="container">
       <div className="row">
         <div className="col">
-          <Link to="/productos/agregar" className="btn btn-primary mt-2 mb-2">
+          <Link to="/insumosYMateriaPrima/agregar" className="btn btn-primary mt-2 mb-2">
             {" "}
             <i className="fa-sharp fa-solid fa-user-plus"> </i>
           </Link>
@@ -42,7 +42,8 @@ const CompMostrarProductos = () => {
                 <th> Nombre </th>
                 <th> Tipo </th>
                 <th> Presentación </th>
-                <th> Valor unidad </th>
+                <th> Precio unidad de medida </th>
+                <th> Precio Presentación</th>
                 <th> Descripción </th>
                 <th> Cantidad </th>
                 <th> Acciones </th>
@@ -83,4 +84,4 @@ const CompMostrarProductos = () => {
     </div>
   );
 };
-export default CompMostrarProductos;
+export default CompInsumosMateriaPrima;
