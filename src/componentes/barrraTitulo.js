@@ -2,6 +2,12 @@ import React from "react";
 import "../App.css";
 
 const CompBarraTitulo = () => {
-  return <h1>SISTEMA DE INFORMACION IAS</h1>;
+  return (
+    <div>
+      <h1>INGENIERIA EN ASEO & SUMINISTROS <br/>IAS S.A.S</h1>
+      <h3 className = "h2Img">LLEGANDO A CADA LUGAR</h3>
+    </div>
+  );
 };
 export default CompBarraTitulo;
+

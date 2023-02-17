@@ -9,8 +9,8 @@ function Accion({ accion }) {
         {" "}
         <i class="fa-sharp fa-solid fa-cart-shopping"></i>
       </Link>
-      <br />
-      <p>{accion}</p>
+
+      <p> {accion}</p>
     </li>
   );
 }

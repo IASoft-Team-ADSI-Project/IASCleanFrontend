@@ -1,7 +1,6 @@
 import React from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
-import CompSeccionDerecha from "../componentes/seccionDerecha";
 import {
   administrador,
   trabajador,
@@ -27,8 +26,9 @@ const RolInterno = ({ roll }) => {
 
   return (
     <div className={"container"}>
-      <nav style={{ display: 'flex', justifyContent: 'center' }}>
-        <ul style={{listStyle: 'none',display: 'flex'}}>
+      <h2 className="rollTitle" >{roll}</h2>
+      <nav style={{ display: "flex", justifyContent: "center" }}>
+        <ul style={{ listStyle: "none", display: "flex" }}>
           {accionesRolInterno.map((accion) => (
             <Accion accion={accion} />
           ))}
@@ -36,10 +36,10 @@ const RolInterno = ({ roll }) => {
       </nav>
       <hr />
 
-      <div className={"row row-cols-2 gx-5"}>
+      {/* <div className={"row row-cols-2 gx-5"}>
         <div className="col">
           <div className="container">
-            <h2 className="h2Usuario">{roll}</h2>
+             <h2 className="h2Usuario">{roll}</h2> 
             <div className="containerCuadro">
               <div className="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
                 <div className="col">
@@ -103,10 +103,8 @@ const RolInterno = ({ roll }) => {
             </div>
           </div>
         </div>
-        <div className="col">
-          <CompSeccionDerecha />
-        </div>
-      </div>
+        <div className="col"></div>
+      </div> */}
     </div>
   );
 };
