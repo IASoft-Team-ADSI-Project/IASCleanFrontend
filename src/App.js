@@ -1,5 +1,6 @@
 import "./App.css";
 import CompBarraTitulo from "./componentes/barrraTitulo";
+import Footer from "./componentes/Footer";
 import CompRutas from "./configuracion/Rutas";
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -16,6 +17,7 @@ function App() {
             </div>
           </div>
         </div>
+        <Footer/>
       </Router>
     </div>
   );
