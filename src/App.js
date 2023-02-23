@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <header className="App-header"></header>
       <Router>
-        <div >
+        <div>
           <CompSeccionDerecha />
           <CompBarraTitulo />
         </div>

@@ -3,6 +3,7 @@ h1 {
   color: aliceblue;
   text-align: center;
   margin: 0;
+  margin-bottom: 0 !important;
 }
 .h2Img {
   box-shadow: 0 12px 16px 0 rgb(164, 69, 132), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
@@ -15,6 +16,9 @@ h3 {
   color: white;
   text-align: center;
   margin: 0;
+}
+.rollTitle {
+  margin-top: 35px !important;  
 }
 
 

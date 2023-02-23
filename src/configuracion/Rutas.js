@@ -18,7 +18,7 @@ const CompRutas = () => {
     <Routes>
       <Route path="/" element={<CompLogIn />} />
 
-      <Route path="/RolInterno" element={<RolInterno roll="TRABAJADOR" />} />
+      <Route path="/RolInterno" element={<RolInterno roll="ADMINISTRADOR" />} />
       {/*       <Route path="/RolInterno" element={<RolInterno roll="TRABAJADOR"/>} />
        */}
       <Route path="/trabajador" element={<CompTrabajador />} />

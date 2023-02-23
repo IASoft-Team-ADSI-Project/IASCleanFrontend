@@ -13,7 +13,7 @@ function Accion({ accion }) {
         <Link to={`/productos`} className="btn btn-outline-primary">
           {" "}
           <i>
-            <div className="icon">{icon}</div>
+            <div className={icon}></div>
           </i>
         </Link>
         <p> {name}</p>
