@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const URL = "http://localhost:5000/api/proveedor/";
+const URL = "http://localhost:5000/proveedores/";
 
 const CompMostrarProveedores = () => {
   const [proveedores, setProveedor] = useState([]);
@@ -18,8 +18,8 @@ const CompMostrarProveedores = () => {
   };
 
   // funcion para eliminar proveedores
-  const eliminarProveedores = async (id) => {
-    await axios.delete(`${URL}${id}`);
+  const eliminarProveedores = async (cod_prov) => {
+    await axios.delete(`${URL}${cod_prov}`);
     getProveedores();
   };
 
@@ -31,43 +31,39 @@ const CompMostrarProveedores = () => {
             {" "}
             <i className="fa-sharp fa-solid fa-user-plus"> </i>
           </Link>
-          <Link to="/administrador" className="btn btn-primary mt-2 mb-2">
-            {"Inicio"}
-            
-          </Link>
           <table className="table">
             <thead className="tableThedBg">
               <tr>
-                <th> Nombres </th>
-                <th> Apellidos </th>
-                <th> Documento </th>
-                <th> Correo </th>
-                <th> Telefono </th>
+                <th> Código </th>
+                <th> Nombre </th>
+                <th> Nit </th>
                 <th> Direccion </th>
-                <th> Empresa </th>
+                <th> Mail </th>
+                <th> Telefono </th>
+                <th> Historico Compras </th>
                 <th> Acciones </th>
               </tr>
             </thead>
             <tbody>
               {proveedores.map((proveedor, index) => (
                 <tr key={index}>
-                  <td> {proveedor.nombres}</td>
-                  <td> {proveedor.apellidos}</td>
-                  <td> {proveedor.documento}</td>
-                  <td> {proveedor.correo}</td>
-                  <td> {proveedor.telefono}</td>
-                  <td> {proveedor.direccion}</td>
-                  <td> {proveedor.empresa}</td>
+                  <td> {proveedor.cod_prov}</td>
+                  <td> {proveedor.nombre_prov}</td>
+                  <td> {proveedor.nit_prov}</td>
+                  <td> {proveedor.direccion_prov}</td>
+                  <td> {proveedor.mail_prov}</td>
+                  <td> {proveedor.telefono_prov}</td>
+                  <td> {proveedor.historico_Compras_prov}</td>
                   <td>
                     <Link
-                      to={`/proveedores/editar/${proveedor._id}`}
+                      to={`/proveedores/editar/${proveedor.cod_prov}`}
                       className="btn btn-info"
                     >
                       {" "}
                       <i className="fa-solid fa-pen-to-square"></i>
                     </Link>
                     <button
-                      onClick={() => eliminarProveedores(proveedor._id)}
+                      onClick={() => eliminarProveedores(proveedor.cod_prov)}
                       className="btn btn-danger"
                     >
                       {" "}

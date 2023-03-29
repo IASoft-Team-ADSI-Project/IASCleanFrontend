@@ -4,7 +4,7 @@ import Footer from "./componentes/Footer";
 import CompRutas from "./configuracion/Rutas";
 import { BrowserRouter as Router } from "react-router-dom";
 import CompSeccionDerecha from "./componentes/seccionDerecha";
-
+import RolInterno from "./Roles/RolInterno";
 function App() {
   return (
     <div className="App">
@@ -13,6 +13,7 @@ function App() {
         <div>
           <CompSeccionDerecha />
           <CompBarraTitulo />
+          <RolInterno roll="ADMINISTRADOR" />
         </div>
         <div className={"container"}>
           <div className={"yd"}>

@@ -3,23 +3,22 @@ import "../App.css";
 import {
   administrador,
   trabajador,
-  proveedor,
-  cliente,
+//  proveedor,
+//  cliente,
 } from "./accionesPorRol";
 import Accion from "./CrearAccion";
-
 let accionesRolInterno = [];
-let accionesRolExterno = [];
+//let accionesRolExterno = [];
 
 const RolInterno = ({ roll }) => {
-  if (roll == "ADMINISTRADOR") {
+  if (roll === "ADMINISTRADOR") {
     accionesRolInterno = administrador();
-  } else if (roll == "TRABAJADOR") {
+  } else if (roll === "TRABAJADOR") {
     accionesRolInterno = trabajador();
-  } else if (roll == "proveedor") {
-    accionesRolExterno = proveedor();
-  } else {
-    accionesRolExterno = cliente();
+  //} else if (roll === "proveedor") {
+  //  accionesRolExterno = proveedor();
+  //} else {
+  //  accionesRolExterno = cliente();
   }
 
   return (
@@ -33,6 +32,7 @@ const RolInterno = ({ roll }) => {
         </ul>
       </nav>
       <hr />
+      
     </div>
   );
 };

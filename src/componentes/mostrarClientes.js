@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const URL = "http://localhost:5000/api/cliente/";
+const URL = "http://localhost:5000/clientes/";
 
 const CompMostrarClientes = () => {
   const [clientes, setCliente] = useState([]);
@@ -10,16 +10,16 @@ const CompMostrarClientes = () => {
     getClientes();
   }, []);
 
-  // creamos la funcion para mostrar los Clientes
+  // creamos la funcion para mostrar los clientes
 
   const getClientes = async () => {
     const res = await axios.get(URL);
     setCliente(res.data);
   };
 
-  // funcion para eliminar Clientes
-  const eliminarClientes = async (id) => {
-    await axios.delete(`${URL}${id}`);
+  // funcion para eliminar clientes
+  const eliminarClientes = async (cod_clnt) => {
+    await axios.delete(`${URL}${cod_clnt}`);
     getClientes();
   };
 
@@ -31,42 +31,41 @@ const CompMostrarClientes = () => {
             {" "}
             <i className="fa-sharp fa-solid fa-user-plus"> </i>
           </Link>
-          <Link to="/administrador" className="btn btn-primary mt-2 mb-2">
-            {"Inicio"}
-          </Link>
           <table className="table">
             <thead className="tableThedBg">
               <tr>
-                <th> Nombres </th>
-                <th> Apellidos </th>
-                <th> Documento </th>
-                <th> Correo </th>
-                <th> Telefono </th>
+                <th> Código </th>
+                <th> Nombre </th>
                 <th> Direccion </th>
-                <th> Empresa </th>
+                <th> Telefono </th>
+                <th> Mail </th>
+                <th> Tipo </th>
+                <th> Historico de ventas </th>
+                <th> Identificacion </th>
                 <th> Acciones </th>
               </tr>
             </thead>
             <tbody>
               {clientes.map((cliente, index) => (
                 <tr key={index}>
-                  <td> {cliente.nombres}</td>
-                  <td> {cliente.apellidos}</td>
-                  <td> {cliente.documento}</td>
-                  <td> {cliente.correo}</td>
-                  <td> {cliente.telefono}</td>
-                  <td> {cliente.direccion}</td>
-                  <td> {cliente.empresa}</td>
+                  <td> {cliente.cod_clnt}</td>
+                  <td> {cliente.nombre_clnt}</td>
+                  <td> {cliente.direccion_clnt}</td>
+                  <td> {cliente.telefono_clnt}</td>
+                  <td> {cliente.mail_clnt}</td>
+                  <td> {cliente.tipo_clnt}</td>
+                  <td> {cliente.historicos_ventas_clnt}</td>
+                  <td> {cliente.id_nit_clnt}</td>
                   <td>
                     <Link
-                      to={`/clientes/editar/${cliente._id}`}
+                      to={`/clientes/editar/${cliente.cod_clnt}`}
                       className="btn btn-info"
                     >
                       {" "}
                       <i className="fa-solid fa-pen-to-square"></i>
                     </Link>
                     <button
-                      onClick={() => eliminarClientes(cliente._id)}
+                      onClick={() => eliminarClientes(cliente.cod_clnt)}
                       className="btn btn-danger"
                     >
                       {" "}

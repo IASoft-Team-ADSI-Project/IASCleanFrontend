@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const URL = "http://localhost:5000/api/producto/";
+const URL = "http://localhost:5000/productos/";
 
 const CompMostrarProductos = () => {
   const [productos, setProducto] = useState([]);
@@ -18,8 +18,8 @@ const CompMostrarProductos = () => {
   };
 
   // funcion para eliminar Productos
-  const eliminarProductos = async (id) => {
-    await axios.delete(`${URL}${id}`);
+  const eliminarProductos = async (cod_prod) => {
+    await axios.delete(`${URL}${cod_prod}`);
     getProductos();
   };
 
@@ -31,10 +31,6 @@ const CompMostrarProductos = () => {
             {" "}
             <i className="fa-sharp fa-solid fa-user-plus"> </i>
           </Link>
-          <Link to="/administrador" className="btn btn-primary mt-2 mb-2">
-            {"Inicio"}
-            
-          </Link>
           <table className="table">
             <thead className="tableThedBg">
               <tr>
@@ -42,8 +38,8 @@ const CompMostrarProductos = () => {
                 <th> Nombre </th>
                 <th> Tipo </th>
                 <th> Presentación </th>
-                <th> Valor unidad </th>
-                <th> Descripción </th>
+                <th> Valor </th>
+                <th> Descripcion </th>
                 <th> Cantidad </th>
                 <th> Acciones </th>
               </tr>
@@ -51,23 +47,23 @@ const CompMostrarProductos = () => {
             <tbody>
               {productos.map((producto, index) => (
                 <tr key={index}>
-                  <td> {producto.nombres}</td>
-                  <td> {producto.apellidos}</td>
-                  <td> {producto.documento}</td>
-                  <td> {producto.correo}</td>
-                  <td> {producto.telefono}</td>
-                  <td> {producto.direccion}</td>
-                  <td> {producto.empresa}</td>
+                  <td> {producto.cod_prod}</td>
+                  <td> {producto.nombre_prod}</td>
+                  <td> {producto.tipo_prod}</td>
+                  <td> {producto.presentacion_prod}</td>
+                  <td> {producto.valor_prod}</td>
+                  <td> {producto.descripcion_prod}</td>
+                  <td> {producto.cantidad_prod}</td>
                   <td>
                     <Link
-                      to={`/productos/editar/${producto._id}`}
+                      to={`/productos/editar/${producto.cod_prod}`}
                       className="btn btn-info"
                     >
                       {" "}
                       <i className="fa-solid fa-pen-to-square"></i>
                     </Link>
                     <button
-                      onClick={() => eliminarProductos(producto._id)}
+                      onClick={() => eliminarProductos(producto.cod_prod)}
                       className="btn btn-danger"
                     >
                       {" "}

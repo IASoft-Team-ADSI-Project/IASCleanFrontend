@@ -1,48 +1,55 @@
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const URL = "http://localhost:5000/productos/";
 
-const CompAgregarProductos = () => {
-  const [cod_prod, setCod_prod] = useState("");
+const CompEditarProductos = () => {
   const [nombre_prod, setNombre_prod] = useState("");
   const [tipo_prod, setTipo_prod] = useState("");
   const [presentacion_prod, setPresentacion_prod] = useState("");
   const [valor_prod, setValor_prod] = useState("");
   const [descripcion_prod, setDescripcion_prod] = useState("");
   const [cantidad_prod, setCantidad_prod] = useState("");
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const {cod_prod} = useParams();
 
-  //funcion guardar
-  const GuardarProductos = async (g) => {
+  // funcion actualizar
+
+  const ActualizarProductos = async (g) => {
     g.preventDefault();
-    await axios.post(URL, {
-      cod_prod: cod_prod,
-      nombre_prod: nombre_prod,
-      tipo_prod: tipo_prod,
-      presentacion_prod: presentacion_prod,
-      valor_prod: valor_prod,
-      descripcion_prod: descripcion_prod,
-      cantidad_prod: cantidad_prod
+    await axios.put(`${URL}${cod_prod}`, {
+        nombre_prod: nombre_prod,
+        tipo_prod: tipo_prod,
+        presentacion_prod: presentacion_prod,
+        valor_prod: valor_prod,
+        descripcion_prod: descripcion_prod,
+        cantidad_prod: cantidad_prod
     });
     navigate("/productos");
   };
+
+  useEffect(() => {
+    getProductosByid();
+    // eslint-disable-next-line
+}, []);
+
+
+  const getProductosByid = async () => {
+    const res = await axios.get(`${URL}${cod_prod}`)
+    setNombre_prod(res.data.nombre_prod)
+    setTipo_prod(res.data.tipo_prod)
+    setPresentacion_prod(res.data.presentacion_prod)
+    setValor_prod(res.data.valor_prod)
+    setDescripcion_prod(res.data.descripcion_prod)
+    setCantidad_prod(res.data.cantidad_prod)
+  };
+
   return (
     <div>
-      <h3> Modulo Agregar Productos</h3>
-      <form onSubmit={GuardarProductos}>
-        <div className="mb -3">
-          <label className="form-label"> Código </label>
-          <input
-            value={cod_prod}
-            onChange={(g) => setCod_prod(g.target.value)}
-            type="number"
-            className="form-control"
-          />
-        </div>
-
-        <div className="mb -3">
+      <h3> Modulo Editar Productos</h3>
+      <form onSubmit={ActualizarProductos}>
+      <div className="mb -3">
           <label className="form-label"> Nombre </label>
           <input
             value={nombre_prod}
@@ -97,7 +104,7 @@ const CompAgregarProductos = () => {
           <input
             value={cantidad_prod}
             onChange={(g) => setCantidad_prod(g.target.value)}
-            type="number"
+            type="text"
             className="form-control"
           />
         </div>
@@ -108,6 +115,5 @@ const CompAgregarProductos = () => {
     </div>
   );
 };
-export default CompAgregarProductos;
 
-
+export default CompEditarProductos;
