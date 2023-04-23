@@ -1,10 +1,11 @@
-import axios from "axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-const URL = "http://localhost:5000/materiaPrima/";
+const URL = "/materiaPrima/";
 
 const CompEditarMateriaPrima = () => {
+  const axiosPrivate = useAxiosPrivate();
   const [empresa_ias_nit_empr, setEmpresa_ias_nit_empr] = useState("");
   const [nombre_matPrima, setNombre_matPrima] = useState("");
   const [descripcion_matPrima, setDescripcion_matPrima] = useState("");
@@ -23,7 +24,7 @@ const CompEditarMateriaPrima = () => {
 
   const ActualizarMateriaPrima = async (g) => {
     g.preventDefault();
-    await axios.put(`${URL}${cod_matPrima}`, {
+    await axiosPrivate.put(`${URL}${cod_matPrima}`, {
       empresa_ias_nit_empr: empresa_ias_nit_empr,
       nombre_matPrima: nombre_matPrima,
       descripcion_matPrima: descripcion_matPrima,
@@ -43,7 +44,7 @@ const CompEditarMateriaPrima = () => {
   }, []);
 
   const getMateriaPrimaByid = async () => {
-    const res = await axios.get(`${URL}${cod_matPrima}`);
+    const res = await axiosPrivate.get(`${URL}${cod_matPrima}`);
     setEmpresa_ias_nit_empr(res.data.empresa_ias_nit_empr);
     setNombre_matPrima(res.data.nombre_matPrima);
     setDescripcion_matPrima(res.data.descripcion_matPrima);

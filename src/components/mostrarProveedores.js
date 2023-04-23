@@ -1,26 +1,26 @@
-import axios from "axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const URL = "http://localhost:5000/proveedores/";
+const URL = "/proveedores";
 
 const CompMostrarProveedores = () => {
+  const axiosPrivate = useAxiosPrivate();
   const [proveedores, setProveedor] = useState([]);
   useEffect(() => {
+    const getProveedores = async () => {
+      const res = await axiosPrivate.get(URL);
+      setProveedor(res.data);
+    };
     getProveedores();
-  }, []);
-
-  // creamos la funcion para mostrar los proveedores
-
-  const getProveedores = async () => {
-    const res = await axios.get(URL);
-    setProveedor(res.data);
-  };
+  }, [axiosPrivate]);
 
   // funcion para eliminar proveedores
   const eliminarProveedores = async (cod_prov) => {
-    await axios.delete(`${URL}${cod_prov}`);
-    getProveedores();
+    await axiosPrivate.delete(`${URL}${cod_prov}`);
+    const res = await axiosPrivate.get(URL);
+    setProveedor(res.data);
   };
 
   return (

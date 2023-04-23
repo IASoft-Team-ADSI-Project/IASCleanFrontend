@@ -6,8 +6,6 @@ function Accion({ accion }) {
   const name = accion.name;
   const icon = accion.icon;
   const link = accion.link;
-  console.log(name);
-  console.log(icon);
 
 /*  const  = "";
   if (name == "Productos") {
@@ -27,6 +25,7 @@ function Accion({ accion }) {
         </Link>
         <p> {name}</p>
       </li>
+      
     </div>
   );
 }

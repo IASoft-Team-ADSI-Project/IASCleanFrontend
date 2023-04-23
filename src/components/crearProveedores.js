@@ -1,10 +1,12 @@
-import axios from "axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const URL = "http://localhost:5000/proveedores/";
+const URL = "/proveedores/";
 
 const CompAgregarProveedores = () => {
+  const axiosPrivate = useAxiosPrivate();
   const [cod_prov, setCod_prov] = useState("");
   const [nombre_prov, setNombre_prov] = useState("");
   const [nit_prov, setNit_prov] = useState("");
@@ -17,7 +19,7 @@ const CompAgregarProveedores = () => {
   //funcion guardar
   const GuardarProveedores = async (g) => {
     g.preventDefault();
-    await axios.post(URL, {
+    await axiosPrivate.post(URL, {
       cod_prov: cod_prov,
       nombre_prov: nombre_prov,
       nit_prov: nit_prov,

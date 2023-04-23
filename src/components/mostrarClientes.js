@@ -1,26 +1,26 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const URL = "http://localhost:5000/clientes/";
+const URL = "/clientes/";
 
 const CompMostrarClientes = () => {
+  const axiosPrivate = useAxiosPrivate();
   const [clientes, setCliente] = useState([]);
+
   useEffect(() => {
+    const getClientes = async () => {
+      const res = await axiosPrivate.get(URL);
+      setCliente(res.data);
+    };
     getClientes();
-  }, []);
-
-  // creamos la funcion para mostrar los clientes
-
-  const getClientes = async () => {
-    const res = await axios.get(URL);
-    setCliente(res.data);
-  };
+  }, [axiosPrivate]);
 
   // funcion para eliminar clientes
   const eliminarClientes = async (cod_clnt) => {
-    await axios.delete(`${URL}${cod_clnt}`);
-    getClientes();
+    await axiosPrivate.delete(`${URL}${cod_clnt}`);
+    const res = await axiosPrivate.get(URL);
+    setCliente(res.data);
   };
 
   return (

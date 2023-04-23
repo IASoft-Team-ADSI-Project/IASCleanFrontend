@@ -1,27 +1,38 @@
-import axios from "axios";
+//import axios from '../api/axios';
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const URL = "http://localhost:5000/productos/";
+const URL = "/productos/";
+
 
 const CompMostrarProductos = () => {
+  const axiosPrivate = useAxiosPrivate();
   const [productos, setProducto] = useState([]);
+  
   useEffect(() => {
+    const getProductos = async () => {
+      const res = await axiosPrivate.get(URL);
+      setProducto(res.data);
+    };
     getProductos();
-  }, []);
+  
+    // funcion para eliminar Productos
+    
+  }, [axiosPrivate])
+  
 
-  // creamos la funcion para mostrar los Productos
-
-  const getProductos = async () => {
-    const res = await axios.get(URL);
+  const eliminarProductos = async (cod_prod) => {
+    await axiosPrivate.delete(`${URL}${cod_prod}`);
+    const res = await axiosPrivate.get(URL , {
+      withCredentials: true,
+  
+    });
     setProducto(res.data);
   };
+  // creamos la funcion para mostrar los Productos
 
-  // funcion para eliminar Productos
-  const eliminarProductos = async (cod_prod) => {
-    await axios.delete(`${URL}${cod_prod}`);
-    getProductos();
-  };
+  
 
   return (
     <div className="container">

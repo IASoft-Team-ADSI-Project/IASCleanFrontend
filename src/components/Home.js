@@ -1,15 +1,15 @@
 import React from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
-import CompSeccionDerecha from "../componentes/seccionDerecha";
+import CompSeccionDerecha from "../components/seccionDerecha";
 
-const CompTrabajador = () => {
+const CompHome = () => {
   return (
     <div className={"container"}>
       <div className={"row row-cols-2 gx-5"}>
         <div className="col">
           <div className="container">
-            <h2 className="h2Usuario">TRABAJADOR</h2>
+            <h2 className="h2Usuario">HOME</h2>
             <div className="containerCuadro">
               <div className="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
                 <div className="col">
@@ -47,12 +47,37 @@ const CompTrabajador = () => {
 
                 <div className="col">
                   <div className="p-3 bg-transparent">
+                    <Link
+                      to={`/proveedores`}
+                      className="btn btn-outline-primary"
+                    >
+                      {" "}
+                      <i class="fa-sharp fa-solid fa-truck-field"></i>
+                    </Link>
+                    <br />
+                    Proveedores
+                  </div>
+                </div>
+
+                <div className="col">
+                  <div className="p-3 bg-transparent">
+                    <Link to={`/`} className="btn btn-outline-primary">
+                      {" "}
+                      <i class="fa-solid fa-chart-simple"></i>
+                    </Link>
+                    <br />
+                    Graficos de ventas
+                  </div>
+                </div>
+
+                <div className="col">
+                  <div className="p-3 bg-transparent">
                     <Link to={`/`} className="btn btn-outline-primary">
                       {" "}
                       <i class="fa-solid fa-money-bill-trend-up"></i>
                     </Link>
                     <br />
-                    Ventas
+                    Ingresos
                   </div>
                 </div>
 
@@ -63,7 +88,7 @@ const CompTrabajador = () => {
                       <i class="fa-sharp fa-solid fa-minus"></i>
                     </Link>
                     <br />
-                    Pending
+                    Gastos
                   </div>
                 </div>
               </div>
@@ -78,4 +103,4 @@ const CompTrabajador = () => {
   );
 };
 
-export default CompTrabajador;
+export default CompHome;

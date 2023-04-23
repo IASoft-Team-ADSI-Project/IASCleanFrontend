@@ -1,33 +1,37 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const URL = "http://localhost:5000/materiaPrima/";
+const URL = "/materiaPrima/";
 
 const CompMostrarMateriaPrima = () => {
+  const axiosPrivate = useAxiosPrivate();
   const [materiaPrima, setMateriaPrima] = useState([]);
   useEffect(() => {
+    const getMateriaPrima = async () => {
+      const res = await axiosPrivate.get(URL);
+      setMateriaPrima(res.data);
+    };
     getMateriaPrima();
-  }, []);
+  }, [axiosPrivate]);
 
   // creamos la funcion para mostrar los materiaPrima
 
-  const getMateriaPrima = async () => {
-    const res = await axios.get(URL);
-    setMateriaPrima(res.data);
-  };
-
   // funcion para eliminar materiaPrima
   const eliminarMateriaPrima = async (cod_matPrima) => {
-    await axios.delete(`${URL}${cod_matPrima}`);
-    getMateriaPrima();
+    await axiosPrivate.delete(`${URL}${cod_matPrima}`);
+    const res = await axiosPrivate.get(URL);
+    setMateriaPrima(res.data);
   };
 
   return (
     <div className="container">
       <div className="row">
         <div className="col">
-          <Link to="/materiaPrima/agregar" className="btn btn-primary mt-2 mb-2">
+          <Link
+            to="/materiaPrima/agregar"
+            className="btn btn-primary mt-2 mb-2"
+          >
             {" "}
             <i className="fa-sharp fa-solid fa-user-plus"> </i>
           </Link>
@@ -69,7 +73,9 @@ const CompMostrarMateriaPrima = () => {
                       <i className="fa-solid fa-pen-to-square"></i>
                     </Link>
                     <button
-                      onClick={() => eliminarMateriaPrima(materiaPrima.cod_matPrima)}
+                      onClick={() =>
+                        eliminarMateriaPrima(materiaPrima.cod_matPrima)
+                      }
                       className="btn btn-danger"
                     >
                       {" "}

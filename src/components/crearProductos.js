@@ -1,55 +1,68 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+//import axios from '../api/axios';
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const URL = "http://localhost:5000/productos/";
+const URL = "/productos";
 
-const CompEditarProductos = () => {
+const CompAgregarProductos = () => {
+  const axiosPrivate = useAxiosPrivate();
+  const [cod_prod, setCod_prod] = useState("");
   const [nombre_prod, setNombre_prod] = useState("");
   const [tipo_prod, setTipo_prod] = useState("");
   const [presentacion_prod, setPresentacion_prod] = useState("");
   const [valor_prod, setValor_prod] = useState("");
   const [descripcion_prod, setDescripcion_prod] = useState("");
   const [cantidad_prod, setCantidad_prod] = useState("");
-    const navigate = useNavigate();
-    const {cod_prod} = useParams();
+  const errRef = useRef();
+  const [errMsg, setErrMsg] = useState("");
+  const navigate = useNavigate();
 
-  // funcion actualizar
+  //funcion guardar
 
-  const ActualizarProductos = async (g) => {
+  const GuardarProductos = async (g) => {
     g.preventDefault();
-    await axios.put(`${URL}${cod_prod}`, {
+    try {
+      await axiosPrivate.post(URL, {
+        cod_prod: cod_prod,
         nombre_prod: nombre_prod,
         tipo_prod: tipo_prod,
         presentacion_prod: presentacion_prod,
         valor_prod: valor_prod,
         descripcion_prod: descripcion_prod,
-        cantidad_prod: cantidad_prod
-    });
-    navigate("/productos");
+        cantidad_prod: cantidad_prod,
+      });
+      navigate("/productos");
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("Error");
+      } else if (err.response?.status === 405) {
+        setErrMsg("El elemento ya existe, si quiere agregar un nuevo elemento por favor cambie el código");
+      }
+    }
   };
-
-  useEffect(() => {
-    getProductosByid();
-    // eslint-disable-next-line
-}, []);
-
-
-  const getProductosByid = async () => {
-    const res = await axios.get(`${URL}${cod_prod}`)
-    setNombre_prod(res.data.nombre_prod)
-    setTipo_prod(res.data.tipo_prod)
-    setPresentacion_prod(res.data.presentacion_prod)
-    setValor_prod(res.data.valor_prod)
-    setDescripcion_prod(res.data.descripcion_prod)
-    setCantidad_prod(res.data.cantidad_prod)
-  };
-
   return (
     <div>
-      <h3> Modulo Editar Productos</h3>
-      <form onSubmit={ActualizarProductos}>
-      <div className="mb -3">
+      <h3> Modulo Agregar Productos</h3>
+      <p
+        ref={errRef}
+        className={errMsg ? "errmsg" : "offscreen"}
+        aria-live="assertive"
+      >
+        {errMsg}
+      </p>
+      <form onSubmit={GuardarProductos}>
+        <div className="mb -3">
+          <label className="form-label"> Código </label>
+          <input
+            value={cod_prod}
+            onChange={(g) => setCod_prod(g.target.value)}
+            type="number"
+            className="form-control"
+          />
+        </div>
+
+        <div className="mb -3">
           <label className="form-label"> Nombre </label>
           <input
             value={nombre_prod}
@@ -104,7 +117,7 @@ const CompEditarProductos = () => {
           <input
             value={cantidad_prod}
             onChange={(g) => setCantidad_prod(g.target.value)}
-            type="text"
+            type="number"
             className="form-control"
           />
         </div>
@@ -115,5 +128,4 @@ const CompEditarProductos = () => {
     </div>
   );
 };
-
-export default CompEditarProductos;
+export default CompAgregarProductos;

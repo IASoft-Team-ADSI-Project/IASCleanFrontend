@@ -1,11 +1,11 @@
-import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const URL = "http://localhost:5000/clientes/";
+const URL = "/clientes/";
 
-const CompAgregarClientes = () => {
-  const [cod_clnt, setCod_clnt] = useState("");
+const CompEditarClientes = () => {
+  const axiosPrivate = useAxiosPrivate();
   const [nombre_clnt, setNombre_clnt] = useState("");
   const [direccion_clnt, setDireccion_clnt] = useState("");
   const [telefono_clnt, setTelefono_clnt] = useState("");
@@ -13,14 +13,15 @@ const CompAgregarClientes = () => {
   const [tipo_clnt, setTipo_clnt] = useState("");
   const [historicos_ventas_clnt, setHistoricos_ventas_clnt] = useState("");
   const [id_nit_clnt, setId_nit_clnt] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
+  const {cod_clnt} = useParams();
 
-  //funcion guardar
-  const GuardarClientes = async (g) => {
+  // funcion actualizar
+
+  const ActualizarClientes = async (g) => {
     g.preventDefault();
-    await axios.post(URL, {
-      cod_clnt: cod_clnt,
-      nombre_clnt: nombre_clnt,
+    await axiosPrivate.put(`${URL}${cod_clnt}`, {
+        nombre_clnt: nombre_clnt,
       direccion_clnt: direccion_clnt,
       telefono_clnt: telefono_clnt,
       mail_clnt: mail_clnt,
@@ -30,21 +31,29 @@ const CompAgregarClientes = () => {
     });
     navigate("/clientes");
   };
+
+  useEffect(() => {
+    getClientesByid();
+    // eslint-disable-next-line
+}, []);
+
+
+  const getClientesByid = async () => {
+    const res = await axiosPrivate.get(`${URL}${cod_clnt}`)
+    setNombre_clnt(res.data.nombre_clnt)
+    setDireccion_clnt(res.data.direccion_clnt)
+    setTelefono_clnt(res.data.telefono_clnt)
+    setMail_clnt(res.data.mail_clnt)
+    setTipo_clnt(res.data.tipo_clnt)
+    setHistoricos_ventas_clnt(res.data.historicos_ventas_clnt)
+    setId_nit_clnt(res.data.id_nit_clnt)
+  };
+
   return (
     <div>
-      <h3> Modulo Agregar Clientes</h3>
-      <form onSubmit={GuardarClientes}>
-        <div className="mb -3">
-          <label className="form-label"> Código </label>
-          <input
-            value={cod_clnt}
-            onChange={(g) => setCod_clnt(g.target.value)}
-            type="number"
-            className="form-control"
-          />
-        </div>
-
-        <div className="mb -3">
+      <h3> Modulo Editar Clientes</h3>
+      <form onSubmit={ActualizarClientes}>
+      <div className="mb -3">
           <label className="form-label"> Nombre </label>
           <input
             value={nombre_clnt}
@@ -69,7 +78,7 @@ const CompAgregarClientes = () => {
           <input
             value={telefono_clnt}
             onChange={(g) => setTelefono_clnt(g.target.value)}
-            type="number"
+            type="text"
             className="form-control"
           />
         </div>
@@ -113,6 +122,7 @@ const CompAgregarClientes = () => {
             className="form-control"
           />
         </div>
+
         <button type="submit" className="btn btn-primary">
           <i className="fa-solid fa-floppy-disk"></i>
         </button>
@@ -120,6 +130,5 @@ const CompAgregarClientes = () => {
     </div>
   );
 };
-export default CompAgregarClientes;
 
-
+export default CompEditarClientes;

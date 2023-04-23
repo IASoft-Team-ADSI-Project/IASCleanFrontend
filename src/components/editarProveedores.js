@@ -1,10 +1,11 @@
-import axios from "axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-const URL = "http://localhost:5000/proveedores/";
+const URL = "/proveedores/";
 
 const CompEditarProveedores = () => {
+  const axiosPrivate = useAxiosPrivate();
   const [nombre_prov, setNombre_prov] = useState("");
   const [nit_prov, setNit_prov] = useState("");
   const [direccion_prov, setDireccion_prov] = useState("");
@@ -18,7 +19,7 @@ const CompEditarProveedores = () => {
 
   const ActualizarProveedores = async (g) => {
     g.preventDefault();
-    await axios.put(`${URL}${cod_prov}`, {
+    await axiosPrivate.put(`${URL}${cod_prov}`, {
       nombre_prov: nombre_prov,
       nit_prov: nit_prov,
       direccion_prov: direccion_prov,
@@ -36,7 +37,7 @@ const CompEditarProveedores = () => {
 
 
   const getProveedoresByid = async () => {
-    const res = await axios.get(`${URL}${cod_prov}`)
+    const res = await axiosPrivate.get(`${URL}${cod_prov}`)
     setNombre_prov(res.data.nombre_prov)
     setNit_prov(res.data.nit_prov)
     setDireccion_prov(res.data.direccion_prov)

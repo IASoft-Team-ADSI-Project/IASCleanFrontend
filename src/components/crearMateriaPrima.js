@@ -1,10 +1,11 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const URL = "http://localhost:5000/materiaPrima/";
+const URL = "/materiaPrima/";
 
 const CompAgregarMateriaPrima = () => {
+  const axiosPrivate = useAxiosPrivate();
   const [cod_matPrima, setCod_matPrima] = useState("");
   const [empresa_ias_nit_empr, setEmpresa_ias_nit_empr] = useState("");
   const [nombre_matPrima, setNombre_matPrima] = useState("");
@@ -20,7 +21,7 @@ const CompAgregarMateriaPrima = () => {
   //funcion guardar
   const GuardarMateriaPrima = async (g) => {
     g.preventDefault();
-    await axios.post(URL, {
+    await axiosPrivate.post(URL, {
       cod_matPrima: cod_matPrima,
       empresa_ias_nit_empr: empresa_ias_nit_empr,
       nombre_matPrima: nombre_matPrima,
